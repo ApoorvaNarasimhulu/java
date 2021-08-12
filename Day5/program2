@@ -1,0 +1,47 @@
+package exceptionHandling;
+
+import java.util.Scanner;
+ class Age extends Exception
+  {
+	 /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public Age(String str)
+	 {
+		 super(str);
+	 }
+  }
+
+ class Question5
+ {
+	 
+	public static void main(String[] args) throws Age
+	{
+		// TODO Auto-generated method stub
+		@SuppressWarnings("resource")
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter the player name");
+		String name = sc.nextLine();
+		System.out.println("Enter the player Age");
+		try
+		{
+			int age = sc.nextInt();
+			if(age<19)
+			{
+				throw new Age("Invalid age");
+			}
+			System.out.println("Player name: " + name+ "\n Player Age :" + age);
+		}
+		
+		catch(Age a)
+		{
+			System.out.println(a);
+		}
+		
+
+	}
+ }
+
+
