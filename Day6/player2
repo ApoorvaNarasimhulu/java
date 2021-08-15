@@ -1,0 +1,27 @@
+package activity6;
+
+public class Player2 implements Comparable<Player2>
+{
+ private String playerName;
+
+ public String getPlayerName() 
+ {
+	return playerName;
+ }
+
+ public void setPlayerName(String playerName)
+ {
+	this.playerName = playerName;
+ }
+
+ public Player2(String playerName) 
+ {
+	super();
+	this.playerName = playerName;
+ }
+ 
+ public int compareTo(Player2 s)
+ {
+	 return this.playerName.compareTo(s.getPlayerName());
+ } 
+}
