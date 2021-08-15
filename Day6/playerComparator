@@ -1,0 +1,19 @@
+package activity6;
+
+import java.util.Comparator;
+
+public class PlayerComparator implements Comparator<Player>
+{
+
+	@Override
+	public int compare(Player s1, Player s2)
+	{
+		// TODO Auto-generated method stub
+		int nameCompare, skillCompare;
+		skillCompare = ((String) s1.getSkill()).compareTo((String) s2.getSkill());
+		nameCompare = s1.getName().compareTo(s2.getName());
+		
+		return (skillCompare == 0)? nameCompare : skillCompare;
+	}
+  
+}
