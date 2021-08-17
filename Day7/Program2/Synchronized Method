@@ -1,0 +1,59 @@
+package activity7;
+
+class Counter
+{
+	int v1 = 0;
+	synchronized public void increment()
+	{
+		v1++;
+	}
+	
+	synchronized public void decrement()
+	{
+		v1--;
+	}
+	
+	synchronized public void showValue()
+	{
+		System.out.println("v1=" + v1);
+	}
+	
+}
+
+
+public class SynchronizationMethod 
+{
+
+	public static void main(String[] args) 
+	{
+		// TODO Auto-generated method stub
+		System.out.println("Main Method starts");
+		Counter c1 = new Counter();
+		Runnable r1 = ()->
+		              {
+		            	synchronized(c1)
+		            	{
+			            c1.increment();
+			            c1.showValue();
+		            	}
+		              };
+		
+		Runnable r2 = ()->
+		              {
+		            	synchronized(c1)
+		            	{
+			            c1.increment();
+			            c1.showValue();
+		            	}
+		              };
+		              
+		Thread t1 = new Thread(r1);
+		t1.start();
+		
+		Thread t2 = new Thread(r2);
+		t2.start();
+		
+		System.out.println("Main program ends");
+
+	}
+}
