@@ -1,0 +1,96 @@
+package activity7;
+
+class One{
+	synchronized void display(String s) {
+		System.out.println(s);
+		for(int i=0;i<20;i++) {
+			System.out.println(i);
+		}
+	}
+}
+
+class Mythread extends Thread
+   {
+	One o;
+	Mythread(One o1)
+	{
+		o=o1;
+	}
+	public void run() 
+	{
+		o.display("Mythread");
+	}
+}
+class Anotherthread extends Thread
+{
+	One  o;
+	Anotherthread(One o1)
+	{
+		o=o1;
+	}
+	public void run() 
+	{
+		o.display("Anotherthread");
+	}
+}
+
+class A
+{
+	public void display(String s) 
+	{
+		System.out.println(s);
+		for(int i=0;i<20;i++) 
+		{
+			System.out.println(i);
+		}
+	}
+}
+
+class B extends Thread
+{
+	A a;
+	B(A a1)
+	{
+		a=a1;
+	}
+	public void run() 
+	{
+		synchronized (a)
+		{
+			a.display("B");
+		}
+	}
+}
+
+class C extends Thread
+{
+	A a;
+	C(A a1)
+	{
+		a=a1;
+	}
+	public void run() 
+	{
+		synchronized(a)
+		{
+			a.display("C");
+		}
+	}
+}
+	
+public class MT 
+{
+	public static void main(String[] args) 
+	{
+		One o=new One();
+		Mythread a=new Mythread(o);
+		Anotherthread b=new Anotherthread(o);
+		a.start();
+		b.start();
+		A a1=new A();
+		B b1=new B(a1);
+		C c1=new C(a1);
+		b1.start();
+		c1.start();
+	}
+}
