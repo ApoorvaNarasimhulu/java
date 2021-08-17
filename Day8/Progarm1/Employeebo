@@ -1,0 +1,55 @@
+package com.ltts.project.bo;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.ltts.project.configure.MyConfigure;
+import com.ltts.project.model.Employee;
+
+public class EmployeeBo 
+{
+	public List<Employee> getAll() throws Exception
+	{
+		Connection con = MyConfigure.getConnection();
+		List<Employee> employee = new ArrayList<Employee>();
+		PreparedStatement ps = con.prepareStatement("select * from employee");
+		ResultSet rs = ps.executeQuery();
+		System.out.println("EmployeeId-----EmployeeNAME------Designation-------Salary-----DATE");
+		while(rs.next()) 
+		{
+			employee.add(new Employee (rs.getInt(1), rs.getString(2),rs.getString(3), rs.getInt(4),rs.getDate(5).toLocalDate()));
+		}
+		return employee;
+
+     }
+	
+	 public String insert(Employee employee) throws Exception {
+		  Connection con = MyConfigure.getConnection();
+		  Statement s = con.createStatement();
+			s.execute("insert into employee values("+employee.getId()+",'"+employee.getName()+"','"+employee.getDesignation()+"','"+employee.getSalary()+"','"+employee.getDate()+"')");
+		  return "Data innserted successfully";
+	  }
+	  
+	  public String update(Employee employee) throws Exception {
+		  Connection con = MyConfigure.getConnection();
+		  Statement s = con.createStatement();
+		  s.execute("UPDATE employee set employeename = '"+employee.getName()+"', designation = '"+employee.getDesignation()+"',salary = '"+employee.getSalary()+"',date = '"+employee.getDate()+"' WHERE employeeid = '" + employee.getId() + "' ");
+		  
+		  return "Data updated successfully";
+	  }
+	  
+	  public String delete(int employeeid) throws Exception {
+		  Connection con = MyConfigure.getConnection();
+		  Statement s = con.createStatement();
+		  s.execute("DELETE from employee WHERE employeeid = "+ employeeid );
+		  
+		  return "Deleted successfully";
+	  }
+	
+	
+	
+}
