@@ -1,0 +1,29 @@
+package activity7;
+import java.sql.*;
+
+public class Delete 
+{
+	public static void main(String[] arg)throws Exception 
+	{
+		String url="jdbc:mysql://localhost:3306/gen_db";
+		String uid="root";
+		String pwd="root";
+		//Class.forName("com.mysql.jdbc.Driver");
+	   Connection con=DriverManager.getConnection(url,uid,pwd);
+	   
+	   PreparedStatement ps=con.prepareStatement("delete from info where uid=5");
+	   System.out.println("deleting");
+		boolean s=ps.execute();
+		con.close();
+	}
+}
+
+
+
+
+
+	
+	
+	
+	
+
