@@ -1,0 +1,25 @@
+package activity7;
+
+import java.sql.*;
+public class Update 
+{
+
+	
+		// TODO Auto-generated method stub
+		public static void main(String[] args) throws SQLException
+		{
+			
+		String url="jdbc:mysql://localhost:3306/gen_db";
+		String uid="root";
+		String pwd="root";
+		//Class.forName("com.mysql.jdbc.Driver");
+		Connection con=DriverManager.getConnection(url,uid,pwd);
+		System.out.println("updating");
+		PreparedStatement s=con.prepareStatement("update students_info firstname = 'SA' where regno =1");
+		
+		@SuppressWarnings("unused")
+		boolean rs = s.execute();
+		con.close();
+	}
+	}
+	
